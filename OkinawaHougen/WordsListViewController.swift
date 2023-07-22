@@ -35,7 +35,7 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                 cell.textLabel!.text = fruits[indexPath.row]
                 
                 return cell
-        //return UITableViewCell()
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,13 +47,6 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
             }
         }
     }
-
-    
-//    @objc func buttonTapped() {
-//        let WordsListViewController = WordsListViewController()
-//        self.navigationController?.pushViewController(WordsListViewController, animated: true)
-//    }
-
 
 
 }
