@@ -43,7 +43,8 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                 if let indexPath = WordsTableView.indexPathForSelectedRow {
                     let destinationController = segue.destination as! JapaneseViewController
                     // ここで遷移先のビューコントローラにデータを渡します
-                    destinationController.selectedWord = words?[indexPath.row].japanese
+                    //destinationController.selectedWord = words?[indexPath.row].japanese
+                    destinationController.selectedWord = words?[indexPath.row]
                 }
             }
         }
