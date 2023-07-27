@@ -11,9 +11,14 @@ class MainViewController : UIViewController {
     
     
     @IBAction func toWrodsListButton(_ sender: Any) {
-//        let WordsListViewController = WordsListViewController() // あなたのテーブルビューコントローラを初期化します
-//            self.navigationController?.pushViewController(WordsListViewController, animated: true)
         }
+    
+    @IBAction func openGoogleFormButton(_ sender: Any) {
+        // このURLは、あなたが作成したGoogleフォームのURLを使用してください。
+        if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSc7TKkqdQfocezbbekE6MuZ1uKyRF-yoSC8RrKk9eqkphrDOA/viewform?usp=pp_url") {
+            UIApplication.shared.open(url)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
