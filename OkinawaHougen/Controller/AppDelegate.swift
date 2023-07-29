@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
+        print("shift+command+gでパスを貼り付け")
         hougenDB.addHougenDB()
 
         let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
