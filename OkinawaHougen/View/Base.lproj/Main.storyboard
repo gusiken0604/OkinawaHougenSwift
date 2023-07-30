@@ -109,21 +109,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bbbbbb" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-8T-Y2T">
-                                <rect key="frame" x="16" y="117.33333333333331" width="361" height="76.666666666666686"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bbbbbb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-8T-Y2T">
+                                <rect key="frame" x="16" y="123.33333333333331" width="361" height="70.666666666666686"/>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="64"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
                                 <rect key="frame" x="16" y="202" width="361" height="381"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="381" id="p8N-ZN-vZo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -134,8 +134,11 @@
                             <constraint firstItem="Bnx-Ne-DFE" firstAttribute="trailing" secondItem="nN8-TY-HL8" secondAttribute="trailingMargin" id="1BZ-6q-HZG"/>
                             <constraint firstItem="Bnx-Ne-DFE" firstAttribute="leading" secondItem="nN8-TY-HL8" secondAttribute="leadingMargin" id="1X1-uw-apL"/>
                             <constraint firstItem="Bnx-Ne-DFE" firstAttribute="trailing" secondItem="dk5-8T-Y2T" secondAttribute="trailing" id="4vz-py-wjo"/>
+                            <constraint firstItem="dk5-8T-Y2T" firstAttribute="top" secondItem="JFG-dF-6HI" secondAttribute="top" constant="20.329999999999998" id="6UV-cn-Lln"/>
                             <constraint firstItem="Bnx-Ne-DFE" firstAttribute="leading" secondItem="dk5-8T-Y2T" secondAttribute="leading" id="Swi-jG-zmb"/>
                             <constraint firstItem="JFG-dF-6HI" firstAttribute="bottom" secondItem="Bnx-Ne-DFE" secondAttribute="bottom" constant="235" id="fFF-Iz-h9Y"/>
+                            <constraint firstItem="JFG-dF-6HI" firstAttribute="trailing" secondItem="dk5-8T-Y2T" secondAttribute="trailing" constant="16" id="oRi-3x-zjU"/>
+                            <constraint firstItem="dk5-8T-Y2T" firstAttribute="leading" secondItem="JFG-dF-6HI" secondAttribute="leading" constant="16" id="wP0-GH-SVa"/>
                             <constraint firstItem="Bnx-Ne-DFE" firstAttribute="top" secondItem="dk5-8T-Y2T" secondAttribute="bottom" constant="8" symbolic="YES" id="ytx-zZ-spo"/>
                         </constraints>
                     </view>

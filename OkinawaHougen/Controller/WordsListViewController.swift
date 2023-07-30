@@ -35,8 +35,15 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
             // セルに表示する値を設定する
             cell.textLabel!.text = words?[indexPath.row].hougen
             
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 20) // ここでサイズを調節します
+            
             return cell
         }
+    //セルの高さ
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
+
         
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == "toJapanese" {

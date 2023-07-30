@@ -10,9 +10,11 @@ import RealmSwift
 
 class HougenDB {
     let realmService = RealmService()
-    
     func addHougenDB() {
         let initialWords = [
+            //以下の単語を("X", "Y"),の形式にする。例えばアップル,りんごだと("アップル","りんご")
+//            apple,りんご
+//            orange,みかん
             //("X", "Y"), ("hougen2", "iiii"), ("hougen3", "japanese3"), ("hougen4", "japanese4"), ("hougen5", "japanese5")
             ("ゆたさるぐとぅ　うにげーさびら", "よろしくお願いします。ゆたしくも同じ意味だが、新しい言葉。"),
             ("かー", "皮"),

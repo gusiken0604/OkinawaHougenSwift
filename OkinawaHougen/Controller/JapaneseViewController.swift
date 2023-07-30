@@ -21,6 +21,8 @@ class JapaneseViewController: UIViewController {
             super.viewDidLoad()
 
             HougenLabel.text = selectedWord?.hougen
+           // HougenLabel.textAlignment = NSTextAlignment.center
+            //HougenLabel.font = UIFont.systemFont(ofSize: 12)
             JapaneseLabel.text = selectedWord?.japanese
             //HougenLabel.text = selectedWord
         }
