@@ -7,6 +7,8 @@
 
 import Foundation
 import RealmSwift
+import UIKit
+
 
 
 
@@ -77,4 +79,25 @@ class RealmService {
             print("Error deleting word: \(error)")
         }
     }
+    
+  
+    
 }
+
+class TopAlignedLabel: UILabel {
+
+    override func drawText(in rect:CGRect) {
+        if let stringText = text {
+            let stringTextAsNSString = stringText as NSString
+            let labelStringSize = stringTextAsNSString.boundingRect(with: CGSize(width: self.frame.width,height: CGFloat.greatestFiniteMagnitude),
+                                                                     options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                                                     attributes: [NSAttributedString.Key.font: font!],
+                                                                     context: nil).size
+            super.drawText(in: CGRect(x: rect.minX, y: rect.minY, width: rect.width, height: ceil(labelStringSize.height)))
+        } else {
+            super.drawText(in: rect)
+        }
+    }
+}
+
+
