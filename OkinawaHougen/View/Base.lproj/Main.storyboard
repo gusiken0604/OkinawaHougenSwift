@@ -109,26 +109,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="bbbbbb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-8T-Y2T">
-                                <rect key="frame" x="16" y="123.33333333333331" width="361" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" name="AccentColor"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
-                                <rect key="frame" x="16" y="155" width="361" height="91"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x83-kh-o3v">
+                                <rect key="frame" x="16" y="103" width="361" height="715"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
+                                        <rect key="frame" x="0.0" y="104" width="361" height="24"/>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bbbbbb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-8T-Y2T">
+                                        <rect key="frame" x="0.0" y="30" width="361" height="24"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="bJl-37-cYC"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="dk5-8T-Y2T" firstAttribute="top" secondItem="x83-kh-o3v" secondAttribute="top" constant="30" id="LM8-Bj-Lbs"/>
+                                    <constraint firstItem="Bnx-Ne-DFE" firstAttribute="top" secondItem="dk5-8T-Y2T" secondAttribute="bottom" constant="50" id="OdO-Hw-aIL"/>
+                                    <constraint firstItem="dk5-8T-Y2T" firstAttribute="leading" secondItem="x83-kh-o3v" secondAttribute="leading" id="RPv-ho-MoU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bnx-Ne-DFE" secondAttribute="trailing" id="kSa-pJ-t8w"/>
+                                    <constraint firstAttribute="trailing" secondItem="dk5-8T-Y2T" secondAttribute="trailing" id="mXu-2r-lAs"/>
+                                    <constraint firstItem="Bnx-Ne-DFE" firstAttribute="leading" secondItem="x83-kh-o3v" secondAttribute="leading" id="pt9-t4-0rw"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JFG-dF-6HI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="leading" secondItem="nN8-TY-HL8" secondAttribute="leadingMargin" id="49H-aa-34Q"/>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="top" secondItem="JFG-dF-6HI" secondAttribute="top" id="IcV-Hw-VTa"/>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="trailing" secondItem="nN8-TY-HL8" secondAttribute="trailingMargin" id="TyU-k4-3Jj"/>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="bottom" secondItem="JFG-dF-6HI" secondAttribute="bottom" id="YBQ-JL-dLj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lP5-RM-KSs"/>
                     <connections>
