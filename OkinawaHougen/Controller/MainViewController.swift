@@ -10,9 +10,13 @@ import UIKit
 class MainViewController : UIViewController {
     
     
-    @IBAction func toWrodsListButton(_ sender: Any) {
+    @IBOutlet weak var toWordsListButton: UIButton!
+    @IBAction func toWordsListButton(_ sender: Any) {
+        
         }
     
+    
+    @IBOutlet weak var openGoogleFormButton: UIButton!
     @IBAction func openGoogleFormButton(_ sender: Any) {
         // このURLは、あなたが作成したGoogleフォームのURLを使用してください。
         if let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSc7TKkqdQfocezbbekE6MuZ1uKyRF-yoSC8RrKk9eqkphrDOA/viewform?usp=pp_url") {
@@ -23,8 +27,9 @@ class MainViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+            
+        toWordsListButton.layer.cornerRadius = 10.0
+        openGoogleFormButton.layer.cornerRadius = 10.0
     }
     
     
