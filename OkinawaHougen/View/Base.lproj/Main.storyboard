@@ -65,7 +65,7 @@
                             <constraint firstItem="W6K-fW-i4Y" firstAttribute="trailing" secondItem="iQR-PI-4aQ" secondAttribute="trailing" id="vew-lQ-RCf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="メイン画面" id="Mla-fw-KpP"/>
+                    <navigationItem key="navigationItem" title="ホーム" id="Mla-fw-KpP"/>
                     <connections>
                         <outlet property="openGoogleFormButton" destination="Z58-Dr-EG9" id="ElS-om-qCR"/>
                         <outlet property="toWordsListButton" destination="MAm-Om-ebM" id="uDy-1W-fVl"/>
