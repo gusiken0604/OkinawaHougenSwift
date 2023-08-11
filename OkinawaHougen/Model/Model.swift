@@ -28,9 +28,15 @@ class RealmService {
     private var realm: Realm
 
     init() {
-        realm = try! Realm()
-    }
-
+            let config = Realm.Configuration(
+                schemaVersion: 4, // 新しいスキーマバージョンを設定
+                migrationBlock: { migration, oldSchemaVersion in
+                    // ここでのマイグレーション処理が必要な場合に記述
+                }
+            )
+            
+            realm = try! Realm(configuration: config)
+        }
     // Add New Word
     func addNewWord(hougen: String, japanese: String) {
         let word = Word()
