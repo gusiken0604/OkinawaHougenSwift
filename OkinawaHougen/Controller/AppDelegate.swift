@@ -11,93 +11,55 @@ import RealmSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let hougenDB = HougenDB()
+    //let hougenDB = HougenDB()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        copyInitialRealmFileIfNeeded()
+//        let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
+//        //print("１")
+//        if let initialFileURL = Bundle.main.url(forResource: "myrealm", withExtension: "realm") {
+//            let fileManager = FileManager.default
+//            //if fileManager.fileExists(atPath: defaultRealmPath.path) {
+//            if !fileManager.fileExists(atPath: defaultRealmPath.path) || fileManager.fileExists(atPath: initialFileURL.path) {
+//                do {
+//                    try fileManager.removeItem(at: defaultRealmPath) // 既存のファイルを削除
+//                    print("既存のRealmファイルを削除しました")
+//                } catch let error {
+//                    print("Realmファイルの削除に失敗しました: \(error)")
+//                }
+//            }
+//            do {
+//                try fileManager.copyItem(at: initialFileURL, to: defaultRealmPath)
+//                print("初期データのRealmファイルをコピーしました")
+//            } catch let error {
+//                print("Realmファイルのコピーに失敗しました: \(error)")
+//            }
+//        } else {
+//            print("初期データのRealmファイルが見つかりませんでした")
+//        }
+
+        // ここで初期化
+        do {
+            // Realmの初期化
+            let _ = try Realm()
+        } catch {
+            print("Realmの初期化に失敗: \(error)")
+        }
 
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         print("shift+command+gでパスを貼り付け")
-        hougenDB.addHougenDB()
 
-        let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
-        let bundleRealmPath = Bundle.main.url(forResource: "default", withExtension: "realm")
-        
-        // ここでスキーマバージョンとマイグレーションを設定
-        let config = Realm.Configuration(
-            fileURL: defaultRealmPath,
-            schemaVersion: 4, // 新しいスキーマバージョンを設定
-            migrationBlock: { migration, oldSchemaVersion in
-                // ここでのマイグレーション処理が必要な場合に記述
-            }
-        )
-        do {
-            // 新しい設定でRealmを初期化
-            let realm = try Realm(configuration: config)
-        } catch let error as NSError {
-            // Realm初期化エラー処理
-            print("Error initializing Realm: \(error)")
-        }
-
-        
-        
-        Realm.Configuration.defaultConfiguration = config
-
-        if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
-            do {
-                try FileManager.default.copyItem(at: bundleRealmPath!, to: defaultRealmPath)
-            } catch let error {
-                print("error: \(error)")
-            }
-        }
-
+        // ここでのデータベースの追加や初期化の処理が必要であれば実行
+        //hougenDB.addHougenDB()
+        //プロジェクトファイルにコピー
+        //copyRealmFile()
         return true
     }
 
-    
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        print(Realm.Configuration.defaultConfiguration.fileURL!)
-//        print("shift+command+gでパスを貼り付け")
-//        hougenDB.addHougenDB()
-//
-//        let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
-//        let bundleRealmPath = Bundle.main.url(forResource: "default", withExtension: "realm")
-//        if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
-//            do {
-//                try FileManager.default.copyItem(at: bundleRealmPath!, to: defaultRealmPath)
-//            } catch let error {
-//                print("error: \(error)")
-//            }
-//        }
-//
-//        return true
-//    }
-//class AppDelegate: UIResponder, UIApplicationDelegate {
-//
-//    let realmService = RealmService()
-//
-//
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//
-//        print(Realm.Configuration.defaultConfiguration.fileURL!)
-//
-//        addInitialWords()
-//
-//        // アプリで使用するdefault.realmのパスを取得
-//                let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
-//                // 初期データが入ったRealmファイルのパスを取得
-//                let bundleRealmPath = Bundle.main.url(forResource: "default", withExtension: "realm")
-//                // アプリで使用するRealmファイルが存在しない（= 初回利用）場合は、シードファイルをコピーする
-//        if !FileManager.default.fileExists(atPath: defaultRealmPath.path) {
-//            do {
-//                try FileManager.default.copyItem(at: bundleRealmPath!, to: defaultRealmPath)
-//            } catch let error {
-//                print("error: \(error)")
-//            }}
-//        // Override point for customization after application launch.
-//        return true
-//    }
 
+
+ 
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
@@ -108,17 +70,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
 
     }
-    
-//    func addInitialWords() {
-//            let initialWords = [("hougen1", "japanese1"), ("hougen2", "japanese2"), ("hougen3", "japanese3"), ("hougen4", "japanese4"), ("hougen5", "japanese5")]
-//
-//            for (hougen, japanese) in initialWords {
-//                if realmService.read().filter("hougen == %@ AND japanese == %@", hougen, japanese).isEmpty {
-//                    realmService.addNewWord(hougen: hougen, japanese: japanese)
-//                }
-//            }
-//        }
 
+    
+    private func copyRealmFile() {
+        do {
+            let realm = try Realm() // 現在のRealmインスタンスを取得
+
+            let destinationURL = URL(fileURLWithPath: "/Users/gushiken/Desktop/Swift/OkinawaHougen/myrealm.realm")
+
+            // 既存のRealmファイルを指定したURLにコピー
+            try realm.writeCopy(toFile: destinationURL)
+
+            print("Realmファイルのコピーが成功しました: \(destinationURL.path)")
+        } catch {
+            print("Realmファイルのコピーに失敗しました: \(error)")
+        }
+    }
+    
+    private func copyInitialRealmFileIfNeeded() {
+           let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
+           
+           if let initialFileURL = Bundle.main.url(forResource: "myrealm", withExtension: "realm") {
+               let fileManager = FileManager.default
+               
+               if fileManager.fileExists(atPath: defaultRealmPath.path) {
+                   do {
+                       try fileManager.removeItem(at: defaultRealmPath) // 既存のファイルを削除
+                       print("既存のRealmファイルを削除しました")
+                   } catch let error {
+                       print("Realmファイルの削除に失敗しました: \(error)")
+                   }
+               }
+               
+               do {
+                   try fileManager.copyItem(at: initialFileURL, to: defaultRealmPath)
+                   print("初期データのRealmファイルをコピーしました")
+               } catch let error {
+                   print("Realmファイルのコピーに失敗しました: \(error)")
+               }
+           } else {
+               print("初期データのRealmファイルが見つかりませんでした")
+           }
+       }
+    
+    
 
 }
 
