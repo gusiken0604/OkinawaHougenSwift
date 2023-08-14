@@ -28,6 +28,7 @@ class RealmService {
     private var realm: Realm
 
     init() {
+        print("RealmService")
             let config = Realm.Configuration(
                 schemaVersion: 4, // 新しいスキーマバージョンを設定
                 migrationBlock: { migration, oldSchemaVersion in

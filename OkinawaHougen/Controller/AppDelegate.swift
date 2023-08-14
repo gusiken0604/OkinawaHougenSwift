@@ -17,11 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //copyRealmFile()
         copyInitialRealmFileIfNeeded()
 
+        let config = Realm.Configuration(
+             schemaVersion: 4, // 新しいスキーマバージョンを設定
+             migrationBlock: { migration, oldSchemaVersion in
+                 // ここでのマイグレーション処理が必要な場合に記述
+             }
+         )
+         Realm.Configuration.defaultConfiguration = config
 
         // ここで初期化
         do {
             // Realmの初期化
-            let _ = try Realm()
+            let realm = try Realm()
+            
+            // 50音順でデータを取得
+           // let results = realm.read().sorted(byKeyPath: "hougen")
+            let results = realm.objects(Word.self).sorted(byKeyPath: "hougen")
+            // 表示
+            for word in results {
+                //print("方言: \(word.hougen), 日本語: \(word.japanese)")
+            }
         } catch {
             print("Realmの初期化に失敗: \(error)")
         }

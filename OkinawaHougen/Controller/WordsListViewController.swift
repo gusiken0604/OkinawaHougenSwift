@@ -21,7 +21,8 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
             self.title = "単語一覧"
             
             // Get data from Realm
-            words = realmService.read()
+           // words = realmService.read()
+            words = realmService.read().sorted(byKeyPath: "hougen")
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
