@@ -14,30 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //let hougenDB = HougenDB()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        //copyRealmFile()
         copyInitialRealmFileIfNeeded()
-//        let defaultRealmPath = Realm.Configuration.defaultConfiguration.fileURL!
-//        //print("１")
-//        if let initialFileURL = Bundle.main.url(forResource: "myrealm", withExtension: "realm") {
-//            let fileManager = FileManager.default
-//            //if fileManager.fileExists(atPath: defaultRealmPath.path) {
-//            if !fileManager.fileExists(atPath: defaultRealmPath.path) || fileManager.fileExists(atPath: initialFileURL.path) {
-//                do {
-//                    try fileManager.removeItem(at: defaultRealmPath) // 既存のファイルを削除
-//                    print("既存のRealmファイルを削除しました")
-//                } catch let error {
-//                    print("Realmファイルの削除に失敗しました: \(error)")
-//                }
-//            }
-//            do {
-//                try fileManager.copyItem(at: initialFileURL, to: defaultRealmPath)
-//                print("初期データのRealmファイルをコピーしました")
-//            } catch let error {
-//                print("Realmファイルのコピーに失敗しました: \(error)")
-//            }
-//        } else {
-//            print("初期データのRealmファイルが見つかりませんでした")
-//        }
+
 
         // ここで初期化
         do {
