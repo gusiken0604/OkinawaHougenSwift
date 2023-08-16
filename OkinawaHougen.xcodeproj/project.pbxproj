@@ -10,6 +10,7 @@
 		B248867A2A72892200E26808 /* hougenDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24886792A72892200E26808 /* hougenDB.swift */; };
 		B24C5AD22A6C1E3100FA2736 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24C5AD12A6C1E3100FA2736 /* Model.swift */; };
 		B25AD9782A878B9500AE8C9A /* myrealm.realm in Resources */ = {isa = PBXBuildFile; fileRef = B25AD9772A878B9500AE8C9A /* myrealm.realm */; };
+		B25AD97E2A8CF77300AE8C9A /* WordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25AD97D2A8CF77300AE8C9A /* WordCell.swift */; };
 		B26A59C92A66C7AB003C7BAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A59C82A66C7AB003C7BAF /* AppDelegate.swift */; };
 		B26A59CB2A66C7AB003C7BAF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A59CA2A66C7AB003C7BAF /* SceneDelegate.swift */; };
 		B26A59CD2A66C7AB003C7BAF /* WordsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26A59CC2A66C7AB003C7BAF /* WordsListViewController.swift */; };
@@ -26,6 +27,7 @@
 		B24886792A72892200E26808 /* hougenDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hougenDB.swift; sourceTree = "<group>"; };
 		B24C5AD12A6C1E3100FA2736 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B25AD9772A878B9500AE8C9A /* myrealm.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = myrealm.realm; sourceTree = SOURCE_ROOT; };
+		B25AD97D2A8CF77300AE8C9A /* WordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCell.swift; sourceTree = "<group>"; };
 		B26A59C52A66C7AB003C7BAF /* OkinawaHougen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OkinawaHougen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B26A59C82A66C7AB003C7BAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B26A59CA2A66C7AB003C7BAF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B26A59E02A6BA5E2003C7BAF /* MainViewController.swift */,
 				B26A59CC2A66C7AB003C7BAF /* WordsListViewController.swift */,
 				B26A59DE2A66D009003C7BAF /* JapaneseViewController.swift */,
+				B25AD97D2A8CF77300AE8C9A /* WordCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				B248867A2A72892200E26808 /* hougenDB.swift in Sources */,
 				B26A59C92A66C7AB003C7BAF /* AppDelegate.swift in Sources */,
 				B24C5AD22A6C1E3100FA2736 /* Model.swift in Sources */,
+				B25AD97E2A8CF77300AE8C9A /* WordCell.swift in Sources */,
 				B26A59CB2A66C7AB003C7BAF /* SceneDelegate.swift in Sources */,
 				B26A59E12A6BA5E2003C7BAF /* MainViewController.swift in Sources */,
 			);

@@ -12,7 +12,9 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     @IBOutlet var WordsTableView: UITableView!
         
-        let realmService = RealmService()
+    //@IBOutlet weak var hougenLabel: UILabel!
+   // @IBOutlet weak var japaneseLabel: UILabel!
+    let realmService = RealmService()
         var words: Results<Word>?
         
         override func viewDidLoad() {
@@ -23,6 +25,10 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
             // Get data from Realm
            // words = realmService.read()
             words = realmService.read().sorted(byKeyPath: "hougen")
+            
+            WordsTableView.reloadData()
+           // WordsTableView.register(UINib(nibName: "WordCell", bundle: nil), forCellReuseIdentifier: "WordCell")
+
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,12 +37,15 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             // セルを取得する
-            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
+//            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
             
             // セルに表示する値を設定する
-            cell.textLabel!.text = words?[indexPath.row].hougen
-            
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 20) // ここでサイズを調節します
+           // cell.textLabel!.text = words?[indexPath.row].hougen
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
+                // セルに表示する値を設定する
+                cell.hougenLabel.text = words?[indexPath.row].hougen
+                cell.japaneseLabel.text = words?[indexPath.row].japanese
+            //cell.textLabel?.font = UIFont.systemFont(ofSize: 20) // ここでサイズを調節します
             
             return cell
         }
