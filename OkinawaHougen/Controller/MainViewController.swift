@@ -26,11 +26,14 @@ class MainViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-            
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
+            navigationItem.backBarButtonItem = backButton
+
         toWordsListButton.layer.cornerRadius = 10.0
         openGoogleFormButton.layer.cornerRadius = 10.0
     }
+    
     
     
     }

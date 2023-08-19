@@ -12,8 +12,6 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     @IBOutlet var WordsTableView: UITableView!
         
-    //@IBOutlet weak var hougenLabel: UILabel!
-   // @IBOutlet weak var japaneseLabel: UILabel!
     let realmService = RealmService()
         var words: Results<Word>?
         
@@ -21,9 +19,16 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
             super.viewDidLoad()
             
             self.title = "単語一覧"
+            let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
+                navigationItem.backBarButtonItem = backButton
+
+        
             
             // Get data from Realm
            // words = realmService.read()
+            // 余白を削除
+           // WordsTableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+         //       WordsTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
             words = realmService.read().sorted(byKeyPath: "hougen")
             
             WordsTableView.reloadData()
@@ -65,4 +70,9 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                 }
             }
         }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return CGFloat.leastNormalMagnitude
+//    }
+
     }
