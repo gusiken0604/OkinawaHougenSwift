@@ -29,9 +29,14 @@ class MainViewController : UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
             navigationItem.backBarButtonItem = backButton
-
+        
+        toWordsListButton.layer.borderColor = UIColor(hex: "#33AAE3").cgColor
+        toWordsListButton.layer.borderWidth = 2
         toWordsListButton.layer.cornerRadius = 10.0
+        
         openGoogleFormButton.layer.cornerRadius = 10.0
+        openGoogleFormButton.layer.borderColor = UIColor(hex: "#33AAE3").cgColor
+        openGoogleFormButton.layer.borderWidth = 2
     }
     
     
