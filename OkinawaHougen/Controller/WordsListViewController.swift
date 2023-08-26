@@ -13,26 +13,32 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     @IBOutlet var WordsTableView: UITableView!
         
     let realmService = RealmService()
-        var words: Results<Word>?
+        //var words: Results<Word>?
+    var words: [Word]?
+
         
         override func viewDidLoad() {
             super.viewDidLoad()
             
+            // ナビゲーションバーの透明性を無効にする
+            //navigationController?.navigationBar.isTranslucent = false
+            // レイアウトマージンを調整
+//            if let statusBarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height {
+//                    view.layoutMargins = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
+//                }
+            //view.layoutMargins = UIEdgeInsets(top: UIApplication.shared.statusBarFrame.height, left: 0, bottom: 0, right: 0)
             self.title = "単語一覧"
             let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
                 navigationItem.backBarButtonItem = backButton
-
-        
             
-            // Get data from Realm
-           // words = realmService.read()
-            // 余白を削除
-           // WordsTableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
-         //       WordsTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: CGFloat.leastNormalMagnitude))
-            words = realmService.read().sorted(byKeyPath: "hougen")
-            
+           // words = realmService.read().sorted(byKeyPath: "hougen")
+            let wordsResults = realmService.read()
+               words = Array(wordsResults).sorted {
+                   let katakana1 = convertToKatakana(romaji: $0.hougen)
+                   let katakana2 = convertToKatakana(romaji: $1.hougen)
+                   return katakana1.localizedCompare(katakana2) == .orderedAscending
+               }
             WordsTableView.reloadData()
-           // WordsTableView.register(UINib(nibName: "WordCell", bundle: nil), forCellReuseIdentifier: "WordCell")
 
         }
         
@@ -42,14 +48,14 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             // セルを取得する
-//            let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
-            
-            // セルに表示する値を設定する
-           // cell.textLabel!.text = words?[indexPath.row].hougen
             let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
                 // セルに表示する値を設定する
-                cell.hougenLabel.text = words?[indexPath.row].hougen
-                cell.japaneseLabel.text = words?[indexPath.row].japanese
+                //cell.hougenLabel.text = words?[indexPath.row].hougen
+            if let romajiWord = words?[indexPath.row].hougen {
+                        cell.hougenLabel.text = convertToKatakana(romaji: romajiWord)
+                    }
+            
+            cell.japaneseLabel.text = words?[indexPath.row].japanese
             //cell.textLabel?.font = UIFont.systemFont(ofSize: 20) // ここでサイズを調節します
             
             return cell
@@ -71,8 +77,42 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
             }
         }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return CGFloat.leastNormalMagnitude
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+
+
+    func convertToKatakana(romaji: String) -> String {
+        var katakana = ""
+        var index = romaji.startIndex
+        while index < romaji.endIndex {
+            var found = false
+            for length in (1...3).reversed() {
+                let endIndex = romaji.index(index, offsetBy: length, limitedBy: romaji.endIndex) ?? index
+                if endIndex <= romaji.endIndex {
+                    let range = index..<endIndex
+                    let key = String(romaji[range])
+                    if let value = romajiToKatakana[key], value.rangeOfCharacter(from: CharacterSet(charactersIn: "-]=?")) == nil {
+                        katakana += value
+                        index = romaji.index(index, offsetBy: length)
+                        found = true
+                        break
+                    }
+                }
+            }
+            if !found {
+                let currentCharacter = romaji[index]
+                if "'-]=?".contains(currentCharacter) {
+                    // 特殊文字の場合、無視する
+                } else {
+                    katakana += String(currentCharacter)
+                }
+                index = romaji.index(after: index)
+            }
+        }
+        return katakana
+    }
+
+
 
     }

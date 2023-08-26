@@ -3,7 +3,6 @@
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -156,56 +155,84 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x83-kh-o3v">
-                                <rect key="frame" x="16" y="64" width="288" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
-                                        <rect key="frame" x="0.0" y="104" width="288" height="24"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1w1-G9-42E">
+                                        <rect key="frame" x="286" y="0.0" width="14" height="20.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20.5" id="D0J-ju-71c"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bbbbbb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-8T-Y2T">
-                                        <rect key="frame" x="0.0" y="30" width="288" height="24"/>
-                                        <color key="backgroundColor" name="AccentColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
+                                        <rect key="frame" x="0.0" y="96" width="320" height="60"/>
+                                        <color key="backgroundColor" red="0.56862745098039214" green="0.84705882352941175" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="0gP-fj-SS4"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment content="japanese">
+                                                <attributes>
+                                                    <font key="NSFont" metaFont="system" size="20"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-8T-Y2T">
+                                        <rect key="frame" x="0.0" y="36" width="320" height="40"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="bJl-37-cYC"/>
+                                            <constraint firstAttribute="height" constant="40" id="LJT-du-fcC"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <nil key="textColor"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="hougen">
+                                                <attributes>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="NSFont" metaFont="system" size="20"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="dk5-8T-Y2T" firstAttribute="top" secondItem="x83-kh-o3v" secondAttribute="top" constant="30" id="LM8-Bj-Lbs"/>
-                                    <constraint firstItem="Bnx-Ne-DFE" firstAttribute="top" secondItem="dk5-8T-Y2T" secondAttribute="bottom" constant="50" id="OdO-Hw-aIL"/>
-                                    <constraint firstItem="dk5-8T-Y2T" firstAttribute="leading" secondItem="x83-kh-o3v" secondAttribute="leading" id="RPv-ho-MoU"/>
-                                    <constraint firstAttribute="trailing" secondItem="Bnx-Ne-DFE" secondAttribute="trailing" id="kSa-pJ-t8w"/>
-                                    <constraint firstAttribute="trailing" secondItem="dk5-8T-Y2T" secondAttribute="trailing" id="mXu-2r-lAs"/>
-                                    <constraint firstItem="Bnx-Ne-DFE" firstAttribute="leading" secondItem="x83-kh-o3v" secondAttribute="leading" id="pt9-t4-0rw"/>
+                                    <constraint firstItem="Bnx-Ne-DFE" firstAttribute="top" secondItem="dk5-8T-Y2T" secondAttribute="bottom" constant="20" id="7Qf-5j-kng"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bnx-Ne-DFE" secondAttribute="trailing" id="9FF-lc-UNE"/>
+                                    <constraint firstItem="1w1-G9-42E" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x83-kh-o3v" secondAttribute="leading" constant="20" symbolic="YES" id="DAw-eD-jLQ"/>
+                                    <constraint firstItem="Bnx-Ne-DFE" firstAttribute="leading" secondItem="x83-kh-o3v" secondAttribute="leading" id="Jzd-OJ-hCY"/>
+                                    <constraint firstItem="dk5-8T-Y2T" firstAttribute="top" secondItem="1w1-G9-42E" secondAttribute="bottom" constant="15.5" id="WmD-oU-66h"/>
+                                    <constraint firstAttribute="trailing" secondItem="dk5-8T-Y2T" secondAttribute="trailing" id="anz-H9-vl4"/>
+                                    <constraint firstItem="dk5-8T-Y2T" firstAttribute="leading" secondItem="x83-kh-o3v" secondAttribute="leading" id="luL-jq-nXm"/>
+                                    <constraint firstItem="1w1-G9-42E" firstAttribute="top" secondItem="x83-kh-o3v" secondAttribute="top" id="vLG-XV-yAW"/>
+                                    <constraint firstAttribute="trailing" secondItem="1w1-G9-42E" secondAttribute="trailing" constant="20" id="zLm-F8-eNE"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JFG-dF-6HI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="x83-kh-o3v" firstAttribute="leading" secondItem="nN8-TY-HL8" secondAttribute="leadingMargin" id="49H-aa-34Q"/>
-                            <constraint firstItem="x83-kh-o3v" firstAttribute="top" secondItem="JFG-dF-6HI" secondAttribute="top" id="IcV-Hw-VTa"/>
-                            <constraint firstItem="x83-kh-o3v" firstAttribute="trailing" secondItem="nN8-TY-HL8" secondAttribute="trailingMargin" id="TyU-k4-3Jj"/>
-                            <constraint firstItem="x83-kh-o3v" firstAttribute="bottom" secondItem="JFG-dF-6HI" secondAttribute="bottom" id="YBQ-JL-dLj"/>
+                            <constraint firstItem="JFG-dF-6HI" firstAttribute="bottom" secondItem="x83-kh-o3v" secondAttribute="bottom" id="4pY-LM-DhZ"/>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="trailing" secondItem="JFG-dF-6HI" secondAttribute="trailing" id="Tko-7y-ptG"/>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="top" secondItem="JFG-dF-6HI" secondAttribute="top" id="eNl-9l-p5U"/>
+                            <constraint firstItem="x83-kh-o3v" firstAttribute="leading" secondItem="JFG-dF-6HI" secondAttribute="leading" id="xFy-ne-fcP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lP5-RM-KSs"/>
                     <connections>
                         <outlet property="HougenLabel" destination="dk5-8T-Y2T" id="A4i-ck-wlS"/>
+                        <outlet property="IdLabel" destination="1w1-G9-42E" id="5bL-tT-szz"/>
                         <outlet property="JapaneseLabel" destination="Bnx-Ne-DFE" id="pME-BC-sRp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnU-xh-nF3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857.2519083969464" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1856.25" y="-27.464788732394368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ghH-fi-zKn">
@@ -238,9 +265,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -249,9 +273,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
