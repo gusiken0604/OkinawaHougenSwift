@@ -32,6 +32,10 @@ class JapaneseViewController: UIViewController {
         if let japanese = selectedWord?.japanese {
                     JapaneseLabel.text = convertToKatakana(romaji: japanese)
                 }
+//        if let japanese = selectedWord?.japanese {
+//            let lines = japanese.split(separator: "\n").map { "　" + convertToKatakana(romaji: String($0)) }
+//            JapaneseLabel.text = lines.joined(separator: "\n")
+//        }
         //IdLabel.text = selectedWord?.id.map{String($0)}
         IdLabel.text = "ID: " + String(selectedWord?.id ?? 0)
 
