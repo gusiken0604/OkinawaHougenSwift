@@ -13,9 +13,9 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     @IBOutlet var WordsTableView: UITableView!
         
     let realmService = RealmService()
-        //var words: Results<Word>?
+   
     var words: [Word]?
-
+    var wordsInSection: [[Word]] = Array(repeating: [], count: 46)
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -38,12 +38,23 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                    let katakana2 = convertToKatakana(romaji: $1.hougen)
                    return katakana1.localizedCompare(katakana2) == .orderedAscending
                }
+            ////
+            for word in words! {
+                    let katakanaWord = convertToKatakana(romaji: word.hougen)
+                    let firstCharacter = String(katakanaWord.prefix(1))
+                    if let index = sectionTitles.firstIndex(of: firstCharacter) {
+                        wordsInSection[index].append(word)
+                    }
+                }
+            
+            ////
             WordsTableView.reloadData()
 
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return words?.count ?? 0
+           // return wordsInSection[section].count
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,7 +66,10 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                         cell.hougenLabel.text = convertToKatakana(romaji: romajiWord)
                     }
             
-            cell.japaneseLabel.text = words?[indexPath.row].japanese
+            if let romajiJapanese = words?[indexPath.row].japanese {
+                    cell.japaneseLabel.text = convertToKatakana(romaji: romajiJapanese)
+                }
+           // cell.japaneseLabel.text = words?[indexPath.row].japanese
             //cell.textLabel?.font = UIFont.systemFont(ofSize: 20) // ここでサイズを調節します
             
             return cell
@@ -113,6 +127,34 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
         return katakana
     }
 
+    
+    // セクションインデックスのタイトルを設定
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"]  // ここに必要な文字を入れてください。
+    }
+    
+    
+    let sectionTitles = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん"]
+    // セクションインデックスタイトルがタップされたときに呼び出される
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        // タイトルに対応するセクションを探してスクロールする処理を書く
+        // 以下は例です
+        for (sectionIndex, sectionTitle) in sectionTitles.enumerated() {
+            if sectionTitle == title {
+                return sectionIndex
+            }
+        }
+        return 0  // デフォルトセクション（見つからなかった場合）
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitles.count
+    }
+
+    // 各セクションにおける行数
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return wordsInSection[section].count
+    //}
 
 
     }
