@@ -71,7 +71,7 @@
                             <constraint firstItem="W6K-fW-i4Y" firstAttribute="trailing" secondItem="iQR-PI-4aQ" secondAttribute="trailing" id="vew-lQ-RCf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ホーム" id="Mla-fw-KpP" userLabel="戻る"/>
+                    <navigationItem key="navigationItem" title="沖縄方言うちなーぐち" id="Mla-fw-KpP" userLabel="戻る"/>
                     <connections>
                         <outlet property="openGoogleFormButton" destination="Z58-Dr-EG9" id="ElS-om-qCR"/>
                         <outlet property="toWordsListButton" destination="MAm-Om-ebM" id="uDy-1W-fVl"/>
@@ -166,12 +166,9 @@
                                         <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
-                                        <rect key="frame" x="0.0" y="96" width="320" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnx-Ne-DFE">
+                                        <rect key="frame" x="0.0" y="96" width="320" height="24"/>
                                         <color key="backgroundColor" red="0.56862745098039214" green="0.84705882352941175" blue="0.89411764705882346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="0gP-fj-SS4"/>
-                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="japanese">
                                                 <attributes>

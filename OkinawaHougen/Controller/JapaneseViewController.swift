@@ -22,6 +22,7 @@ class JapaneseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //HougenLabel.text = selectedWord?.hougen
         // 方言（ローマ字）をカタカナに変換
                 if let hougen = selectedWord?.hougen {
