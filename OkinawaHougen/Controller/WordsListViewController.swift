@@ -8,6 +8,9 @@
 import UIKit
 import RealmSwift
 
+// グローバル変数で検索の状態を管理
+var isSearching = false
+
 class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet var WordsTableView: UITableView!
@@ -16,9 +19,25 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     var words: [Word]?
     var wordsInSection: [[Word]] = []
+    var filteredWords: [Word] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // UISearchControllerの初期化
+            let searchController = UISearchController(searchResultsController: nil)
+            
+            // 更新のデリゲート設定
+            searchController.searchResultsUpdater = self
+            
+            // 検索バーのプレースホルダー設定
+            searchController.searchBar.placeholder = "検索"
+            
+            // Navigation BarにSearch Barを追加
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        
         WordsTableView.delegate = self
         WordsTableView.dataSource = self
         
@@ -43,6 +62,8 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                 wordsInSection[index].append(word)
             }
         }
+        // 初期状態で全ての単語を表示
+            filteredWords = words ?? []
         
         WordsTableView.reloadData()
         
@@ -50,20 +71,17 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return wordsInSection[section].count
-        
-    }
+               return isSearching ? filteredWords.count : wordsInSection[section].count
+           }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
-        let word = wordsInSection[indexPath.section][indexPath.row]
-        // ここでローマ字をカタカナに変換
-        cell.hougenLabel.text = convertToKatakana(romaji: word.hougen)
-        cell.japaneseLabel.text = convertToKatakana(romaji: word.japanese)
-        
-        return cell
-        
+            let word = isSearching ? filteredWords[indexPath.row] : wordsInSection[indexPath.section][indexPath.row]
+            cell.hougenLabel.text = convertToKatakana(romaji: word.hougen)
+            cell.japaneseLabel.text = word.japanese
+            return cell
     }
     //セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -73,12 +91,23 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toJapanese" {
-            if let indexPath = WordsTableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! JapaneseViewController
-                // ここで遷移先のビューコントローラにデータを渡します
-                destinationController.selectedWord = wordsInSection[indexPath.section][indexPath.row]
+                if let indexPath = WordsTableView.indexPathForSelectedRow {
+                    let destinationController = segue.destination as! JapaneseViewController
+                    
+                    let selectedWord: Word
+                    if isSearching {
+                        // 検索中はfilteredWordsから選択された単語を取得
+                        selectedWord = filteredWords[indexPath.row]
+                    } else {
+                        // 検索中でない場合は、通常の配列から選択された単語を取得
+                        selectedWord = wordsInSection[indexPath.section][indexPath.row]
+                    }
+                    
+                    // 遷移先に選択された単語を渡す
+                    destinationController.selectedWord = selectedWord
+                }
             }
-        }
+
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -119,7 +148,9 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     // セクションインデックスのタイトルを設定
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return sectionTitles
+        //return sectionTitles
+//        return isSearching ? nil : sectionTitles.count
+        return isSearching ? nil : sectionTitles
     }
     
     let sectionTitles = ["ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン"]
@@ -137,5 +168,31 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         return sectionTitles
     }
+    
+    
+    
+}
+
+extension WordsListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            isSearching = true
+            
+            let katakanaSearchText = convertToKatakana(romaji: searchText)
+            
+            // hougen または japanese が完全に一致するデータをフィルタリング
+            filteredWords = words?.filter { word in
+                let katakanaWord = convertToKatakana(romaji: word.hougen)
+                return katakanaWord == katakanaSearchText || word.japanese == searchText
+            } ?? []
+        } else {
+            isSearching = false
+            // 検索文字がない場合は全データを表示
+            filteredWords = words ?? []
+        }
+        
+        WordsTableView.reloadData()
+    }
+
     
 }
