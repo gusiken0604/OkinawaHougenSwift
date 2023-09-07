@@ -11,131 +11,80 @@ import RealmSwift
 class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet var WordsTableView: UITableView!
-        
+    
     let realmService = RealmService()
-   
+    
     var words: [Word]?
-    //var wordsInSection: [[Word]] = Array(repeating: [], count: 46)
     var wordsInSection: [[Word]] = []
     
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            WordsTableView.delegate = self
-            WordsTableView.dataSource = self
-            
-            wordsInSection = Array(repeating: [], count: sectionTitles.count) // セクションごとの単語リストの初期化
-
-            
-            self.title = "単語一覧"
-            let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
-                navigationItem.backBarButtonItem = backButton
-            
-           // words = realmService.read().sorted(byKeyPath: "hougen")
-            let wordsResults = realmService.read()
-            //print("wordsResults: \(wordsResults)")
-            
-               words = Array(wordsResults).sorted {
-                   let katakana1 = convertToKatakana(romaji: $0.hougen)
-                   let katakana2 = convertToKatakana(romaji: $1.hougen)
-                   return katakana1.localizedCompare(katakana2) == .orderedAscending
-               }
-            ////
-//            for word in words! {
-//                    let katakanaWord = convertToKatakana(romaji: word.hougen)
-//                    let firstCharacter = String(katakanaWord.prefix(1))
-//                    if let index = sectionTitles.firstIndex(of: firstCharacter) {
-//                        wordsInSection[index].append(word)
-//                    }
-//                }
-            // wordsInSectionに単語を分類
-           // print("Words: \(words)")
-
-//                    for word in words! {
-//                        let firstCharacter = String(word.hougen[word.hougen.startIndex..<word.hougen.index(after: word.hougen.startIndex)])
-//
-//                        //et firstCharacter = String(word.hougen.prefix(1))
-//                        print("First Character: \(firstCharacter)")
-//                        if let index = sectionTitles.firstIndex(of: firstCharacter) {
-//                            print("Index found: \(index)")
-//                            wordsInSection[index].append(word)
-//                        } else {
-//                            print("Index not found for \(firstCharacter)")
-//                        }
-//                    }
-            for word in words! {
-                let katakanaWord = convertToKatakana(romaji: word.hougen)
-                let firstCharacter = String(katakanaWord.prefix(1))
-                if let index = sectionTitles.firstIndex(of: firstCharacter) {
-                    wordsInSection[index].append(word)
-                } else {
-                   // print("Index not found for \(firstCharacter)")
-                }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        WordsTableView.delegate = self
+        WordsTableView.dataSource = self
+        
+        wordsInSection = Array(repeating: [], count: sectionTitles.count) // セクションごとの単語リストの初期化
+        
+        self.title = "単語一覧"
+        let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        
+        let wordsResults = realmService.read()
+        
+        words = Array(wordsResults).sorted {
+            let katakana1 = convertToKatakana(romaji: $0.hougen)
+            let katakana2 = convertToKatakana(romaji: $1.hougen)
+            return katakana1.localizedCompare(katakana2) == .orderedAscending
+        }
+        
+        for word in words! {
+            let katakanaWord = convertToKatakana(romaji: word.hougen)
+            let firstCharacter = String(katakanaWord.prefix(1))
+            if let index = sectionTitles.firstIndex(of: firstCharacter) {
+                wordsInSection[index].append(word)
             }
-
-            //print("Words in section: \(wordsInSection)")
-
-            ////
-            WordsTableView.reloadData()
-
         }
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           //return words?.count ?? 0
-           // print("Count for section \(section): \(wordsInSection[section].count)")
-           return wordsInSection[section].count
-            
-            
-        }
+        WordsTableView.reloadData()
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            //print("Creating cell for \(indexPath)")
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
-            let word = wordsInSection[indexPath.section][indexPath.row]
-            // ここでローマ字をカタカナに変換
-            cell.hougenLabel.text = convertToKatakana(romaji: word.hougen)
-            cell.japaneseLabel.text = convertToKatakana(romaji: word.japanese)
-//            cell.hougenLabel.text = word.hougen
-//            cell.japaneseLabel.text = word.japanese
-            return cell
-            // セルを取得する
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
-//
-//                // セルに表示する値を設定する
-//                //cell.hougenLabel.text = words?[indexPath.row].hougen
-//            if let romajiWord = words?[indexPath.row].hougen {
-//                        cell.hougenLabel.text = convertToKatakana(romaji: romajiWord)
-//                    }
-//
-//            if let romajiJapanese = words?[indexPath.row].japanese {
-//                    cell.japaneseLabel.text = convertToKatakana(romaji: romajiJapanese)
-//                }
-//
-//            return cell
-        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return wordsInSection[section].count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
+        let word = wordsInSection[indexPath.section][indexPath.row]
+        // ここでローマ字をカタカナに変換
+        cell.hougenLabel.text = convertToKatakana(romaji: word.hougen)
+        cell.japaneseLabel.text = convertToKatakana(romaji: word.japanese)
+        
+        return cell
+        
+    }
     //セルの高さ
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60.0
     }
-
-        
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "toJapanese" {
-                if let indexPath = WordsTableView.indexPathForSelectedRow {
-                    let destinationController = segue.destination as! JapaneseViewController
-                    // ここで遷移先のビューコントローラにデータを渡します
-                    //destinationController.selectedWord = words?[indexPath.row].japanese
-                   // destinationController.selectedWord = words?[indexPath.row]
-                    destinationController.selectedWord = wordsInSection[indexPath.section][indexPath.row]
-                }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toJapanese" {
+            if let indexPath = WordsTableView.indexPathForSelectedRow {
+                let destinationController = segue.destination as! JapaneseViewController
+                // ここで遷移先のビューコントローラにデータを渡します
+                destinationController.selectedWord = wordsInSection[indexPath.section][indexPath.row]
             }
         }
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
-
-
+    
     func convertToKatakana(romaji: String) -> String {
         var katakana = ""
         var index = romaji.startIndex
@@ -154,6 +103,7 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
                     }
                 }
             }
+
             if !found {
                 let currentCharacter = romaji[index]
                 if "'-]=?".contains(currentCharacter) {
@@ -166,7 +116,6 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
         return katakana
     }
-
     
     // セクションインデックスのタイトルを設定
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
@@ -174,29 +123,19 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     let sectionTitles = ["ア", "イ", "ウ", "エ", "オ", "カ", "キ", "ク", "ケ", "コ", "サ", "シ", "ス", "セ", "ソ", "タ", "チ", "ツ", "テ", "ト", "ナ", "ニ", "ヌ", "ネ", "ノ", "ハ", "ヒ", "フ", "ヘ", "ホ", "マ", "ミ", "ム", "メ", "モ", "ヤ", "ユ", "ヨ", "ラ", "リ", "ル", "レ", "ロ", "ワ", "ヲ", "ン"]
-
-  // セクションインデックスタイトルがタップされたときに呼び出される
+    
+    // セクションインデックスタイトルがタップされたときに呼び出される
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        
         return sectionTitles.firstIndex(of: title) ?? 0
-        // タイトルに対応するセクションを探してスクロールする処理を書く
-        // 以下は例です
-//        if let sectionIndex = sectionTitles.firstIndex(of: title) {
-//                return sectionIndex
-//            }
-//            return 0
-
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }
-
     
-       //セクション名の配列を返す
-       func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-           return sectionTitles
-       }
-
-
+    //セクション名の配列を返す
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return sectionTitles
     }
+    
+}
