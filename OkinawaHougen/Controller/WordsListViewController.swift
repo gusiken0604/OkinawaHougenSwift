@@ -46,6 +46,15 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.title = "単語一覧"
         let backButton = UIBarButtonItem(title: "戻る", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backButton
+        // 透明度を変更しないようにする
+       // navigationController?.navigationBar.isTranslucent = false
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(hex: "#33AAE3") // お好きな色に設定
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+
         
         let wordsResults = realmService.read()
         
@@ -80,7 +89,7 @@ class WordsListViewController: UIViewController,UITableViewDelegate,UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordCell
             let word = isSearching ? filteredWords[indexPath.row] : wordsInSection[indexPath.section][indexPath.row]
             cell.hougenLabel.text = convertToKatakana(romaji: word.hougen)
-            cell.japaneseLabel.text = word.japanese
+        cell.japaneseLabel.text = convertToKatakana(romaji: word.japanese)// word.japanese
             return cell
     }
     //セルの高さ

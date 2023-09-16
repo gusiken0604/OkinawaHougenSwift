@@ -6,6 +6,8 @@
 	<string>Light</string>
 	<key>CFBundleIdentifier</key>
 	<string></string>
+    <key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6228595435327740~7862719786</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

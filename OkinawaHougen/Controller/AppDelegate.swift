@@ -7,11 +7,10 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    //let hougenDB = HougenDB()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         //copyRealmFile()
@@ -35,13 +34,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Realmの初期化に失敗: \(error)")
         }
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        print("shift+command+gでパスを貼り付け")
+        // print(Realm.Configuration.defaultConfiguration.fileURL!)
+        //print("shift+command+gでパスを貼り付け")
         
         // ここでのデータベースの追加や初期化の処理が必要であれば実行
         //hougenDB.addHougenDB()
         //プロジェクトファイルにコピー
         //copyRealmFile()
+        
+        // Initialize Google Mobile Ads SDK
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         return true
     }
     
